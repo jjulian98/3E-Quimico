@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Crear Cuenta</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      background: url('img/prefeco.png') 
+        no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 0;
+    }
+    .login-box {
+      position: relative;
+      z-index: 1;
+      background: url('https://images.unsplash.com/photo-1601597111158-3e37d4c1887c?auto=format&fit=crop&w=400&q=80') no-repeat center;
+      background-size: cover;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 350px;
+      margin: auto;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+    }
+    /* Para pantallas donde el formulario es más alto que el viewport */
+    @media (max-height: 700px) {
+      .login-box {
+        position: relative;
+        top: auto;
+        transform: none;
+        margin: 30px auto;
+      }
+    }
+    .login-box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 15px;
+      z-index: -1;
+    }
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    .login-box label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #fff;
+    }
+    .login-box input[type="text"],
+    .login-box input[type="email"],
+    .login-box input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    /* Indicador de fortaleza de contraseña */
+    .fortaleza-barra {
+      height: 5px;
+      border-radius: 4px;
+      margin-top: -10px;
+      margin-bottom: 15px;
+      background-color: #555;
+      transition: background-color 0.3s ease, width 0.3s ease;
+    }
+    .fortaleza-texto {
+      font-size: 12px;
+      margin-top: -12px;
+      margin-bottom: 12px;
+      color: #ccc;
+    }
+
+    .login-box input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      background-color: #00c853;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      margin-top: 5px;
+    }
+    .login-box input[type="submit"]:hover {
+      background-color: #00b548;
+    }
+
+    /* Mensaje de error */
+    .mensaje-error {
+      display: none;
+      text-align: center;
+      background-color: rgba(255, 50, 50, 0.2);
+      border: 1px solid #ff4444;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 15px;
+      color: #ffaaaa;
+      font-size: 13px;
+    }
+
+    /* Mensaje de éxito */
+    .mensaje-exito {
+      display: none;
+      text-align: center;
+      background-color: rgba(0, 200, 83, 0.2);
+      border: 1px solid #00c853;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 15px;
+      color: #a5ffcb;
+      font-size: 14px;
+    }
+
+    .login-box .extra {
+      text-align: center;
+      margin-top: 15px;
+    }
+    .login-box .extra a {
+      text-decoration: none;
+      color: #00e5ff;
+      font-size: 14px;
+    }
+    .login-box .extra a:hover {
+      text-decoration: underline;
+    }
+
+    .icono {
+      text-align: center;
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <div class="icono">👤</div>
+    <h2>Crear Cuenta</h2>
+
+    <div class="mensaje-error" id="mensajeError"></div>
+    <div class="mensaje-exito" id="mensajeExito">✅ ¡Cuenta creada exitosamente! Redirigiendo...</div>
+
+    <form action="#" method="post" id="formularioRegistro">
+
+      <label for="nombre">Nombre completo</label>
+      <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+
+      <label for="usuario">Usuario</label>
+      <input type="text" id="usuario" name="usuario" placeholder="Elige un usuario" required />
+
+      <label for="correo">Correo electrónico</label>
+      <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com" required />
+
+      <label for="contrasena">Contraseña</label>
+      <input type="password" id="contrasena" name="contrasena" placeholder="Mínimo 6 caracteres" required />
+      <div class="fortaleza-barra" id="fortalezaBarra"></div>
+      <div class="fortaleza-texto" id="fortalezaTexto"></div>
+
+      <label for="confirmar">Confirmar contraseña</label>
+      <input type="password" id="confirmar" name="confirmar" placeholder="Repite tu contraseña" required />
+
+      <input type="submit" value="Crear cuenta" />
+    </form>
+
+    <div class="extra">
+      <p><a href="login.html">← Ya tengo cuenta, Iniciar Sesión</a></p>
+    </div>
+  </div>
+
+  <script>
+    // Indicador de fortaleza de contraseña
+    document.getElementById('contrasena').addEventListener('input', function () {
+      const val = this.value;
+      const barra = document.getElementById('fortalezaBarra');
+      const texto = document.getElementById('fortalezaTexto');
+
+      if (val.length === 0) {
+        barra.style.backgroundColor = '#555';
+        texto.textContent = '';
+      } else if (val.length < 4) {
+        barra.style.backgroundColor = '#ff4444';
+        texto.textContent = 'Contraseña débil';
+        texto.style.color = '#ff8888';
+      } else if (val.length < 7) {
+        barra.style.backgroundColor = '#ffaa00';
+        texto.textContent = 'Contraseña regular';
+        texto.style.color = '#ffcc66';
+      } else {
+        barra.style.backgroundColor = '#00c853';
+        texto.textContent = 'Contraseña fuerte';
+        texto.style.color = '#a5ffcb';
+      }
+    });
+
+    // Validación del formulario
+    document.getElementById('formularioRegistro').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const contrasena = document.getElementById('contrasena').value;
+      const confirmar = document.getElementById('confirmar').value;
+      const error = document.getElementById('mensajeError');
+      const exito = document.getElementById('mensajeExito');
+
+      error.style.display = 'none';
+      exito.style.display = 'none';
+
+      if (contrasena.length < 6) {
+        error.textContent = '⚠️ La contraseña debe tener al menos 6 caracteres.';
+        error.style.display = 'block';
+        return;
+      }
+
+      if (contrasena !== confirmar) {
+        error.textContent = '⚠️ Las contraseñas no coinciden.';
+        error.style.display = 'block';
+        return;
+      }
+
+      exito.style.display = 'block';
+      this.reset();
+      document.getElementById('fortalezaBarra').style.backgroundColor = '#555';
+      document.getElementById('fortalezaTexto').textContent = '';
+    });
+  </script>
+</body>
+</html>

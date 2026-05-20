@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Olvidé mi Contraseña</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      background: url('img/prefeco.png') 
+        no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 0;
+    }
+    .login-box {
+      position: relative;
+      z-index: 1;
+      background: url('https://images.unsplash.com/photo-1601597111158-3e37d4c1887c?auto=format&fit=crop&w=400&q=80') no-repeat center;
+      background-size: cover;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 350px;
+      margin: auto;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+    }
+    .login-box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 15px;
+      z-index: -1;
+    }
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .login-box .descripcion {
+      text-align: center;
+      font-size: 14px;
+      color: #ccc;
+      margin-bottom: 25px;
+      line-height: 1.5;
+    }
+    .login-box label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #fff;
+    }
+    .login-box input[type="email"],
+    .login-box input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+    }
+    .login-box input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      background-color: #00c853;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .login-box input[type="submit"]:hover {
+      background-color: #00b548;
+    }
+
+    /* Mensaje de éxito (oculto por defecto) */
+    .mensaje-exito {
+      display: none;
+      text-align: center;
+      background-color: rgba(0, 200, 83, 0.2);
+      border: 1px solid #00c853;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 20px;
+      color: #a5ffcb;
+      font-size: 14px;
+    }
+
+    .login-box .extra {
+      text-align: center;
+      margin-top: 15px;
+    }
+    .login-box .extra a {
+      text-decoration: none;
+      color: #00e5ff;
+      font-size: 14px;
+    }
+    .login-box .extra a:hover {
+      text-decoration: underline;
+    }
+
+    /* Ícono de candado */
+    .icono-candado {
+      text-align: center;
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <div class="icono-candado">🔒</div>
+    <h2>¿Olvidaste tu contraseña?</h2>
+    <p class="descripcion">Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.</p>
+
+    <div class="mensaje-exito" id="mensajeExito">
+      ✅ Se ha enviado un enlace de recuperación a tu correo.
+    </div>
+
+    <form action="#" method="post" id="formularioRecuperar">
+      <label for="correo">Correo electrónico</label>
+      <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com" required />
+      <input type="submit" value="Enviar enlace" />
+    </form>
+
+    <div class="extra">
+      <p><a href="login.html">← Volver a Iniciar Sesión</a></p>
+      <p style="margin-top: 8px;"><a href="crear_cuenta.html">Crear cuenta nueva</a></p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('formularioRecuperar').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const correo = document.getElementById('correo').value;
+      if (correo) {
+        document.getElementById('mensajeExito').style.display = 'block';
+        this.reset();
+      }
+    });
+  </script>
+</body>
+</html>
