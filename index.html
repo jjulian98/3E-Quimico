@@ -183,19 +183,7 @@
 </div>
         </section>
     </main>
-<script>
-let visitas = localStorage.getItem("visitas");
 
-if(visitas == null){
-    visitas = 0;
-}
-
-visitas++;
-
-localStorage.setItem("visitas", visitas);
-
-document.write("Visitas: " + visitas);
-</script>
 
     <footer>
         <div class="container">
@@ -230,5 +218,18 @@ document.write("Visitas: " + visitas);
     </footer>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="banner.js"></script>
+<script>
+let visitas = localStorage.getItem("visitas");
+
+if(visitas == null){
+    visitas = 0;
+}
+
+visitas++;
+
+localStorage.setItem("visitas", visitas);
+
+document.write("Visitas: " + visitas);
+</script>
 </body>
 </html>
